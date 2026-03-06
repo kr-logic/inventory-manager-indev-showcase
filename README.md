@@ -1,3 +1,9 @@
+## Projekt Feladat Dokumentáció: Raktárkezelő Szoftver (InventoryManager)
+Készítette: Princzinger Krisztián, 2026
+
+Jelenleg folyamatban lévő projekt: .NET keretrendszerben fejlesztett C# Készletnyilvántartó alkalmazás. Egyetemi beadandó projekt lévén a repozitórium a végső leadási határidőig rejtve marad a kód védelme érdekében. Ezért a képeken és a szövegben lévő funkciók változhatnak a jövőben.
+
+
 ## A program célja és szándékolt működése
 
 A feltöltött program egy grafikus felületű (`Windows Forms`) asztali alkalmazás, amely egy bolt terméktípusainak nyilvántartására szolgál. A felhasználó képes új terméktípusokat felvinni a rendszerbe, a meglévőket kilistázni, helyben módosítani és törölni, valamint a teljes adatbázist (`products.csv`) menteni és betölteni. A program figyeli a mentetlen módosításokat, és figyelmeztetéssel védi a felhasználót az adatvesztéstől. 

@@ -6,7 +6,7 @@ Jelenleg folyamatban lévő projekt: .NET keretrendszerben fejlesztett C# Készl
 
 ## A program célja és szándékolt működése
 
-A feltöltött program egy grafikus felületű (`Windows Forms`) asztali alkalmazás, amely egy bolt terméktípusainak nyilvántartására szolgál. A felhasználó képes új terméktípusokat felvinni a rendszerbe, a meglévőket kilistázni, helyben módosítani és törölni, valamint a teljes adatbázist (`products.csv`) menteni és betölteni. A program figyeli a mentetlen módosításokat, és figyelmeztetéssel védi a felhasználót az adatvesztéstől. 
+A feltöltött program egy grafikus felületű (`Windows Forms`) asztali alkalmazás, amely egy raktár terméktípusainak nyilvántartására szolgál. A felhasználó képes új terméktípusokat felvinni a rendszerbe, a meglévőket kilistázni, helyben módosítani és törölni, valamint a teljes adatbázist (`products.csv`) menteni és betölteni. A program figyeli a mentetlen módosításokat, és figyelmeztetéssel védi a felhasználót az adatvesztéstől. 
 
 <img width="806" height="486" alt="image" src="https://github.com/user-attachments/assets/f624a2fc-319b-490c-bce0-006b1a360eeb" />
 

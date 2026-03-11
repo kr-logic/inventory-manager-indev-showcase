@@ -3,7 +3,7 @@ A magyar Readme fájl megtekintéséhez [kattints ide.](README.md)
 ## Project Task Documentation: Inventory Management Software (InventoryManager)
 Created by: Princzinger Krisztián, 2026
 
-Currently ongoing project: A C# Inventory Management application developed in the .NET framework. As a university assignment project, the repository will remain private until the final submission deadline (May) to protect the code. Therefore, the features shown in the images and described in the text may change in the future.
+Currently ongoing project: A **`C# Inventory Management application developed in the .NET framework`**. As a university assignment project, the repository will remain private until the final submission deadline (May) to protect the code. Therefore, the features shown in the images and described in the text may change in the future.
 
 ## Purpose and intended operation of the program
 

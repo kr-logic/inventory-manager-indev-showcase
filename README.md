@@ -3,7 +3,7 @@ For English version of the Readme, please [click here.](README_EN.md)
 ## Projekt Feladat Dokumentáció: Raktárkezelő Szoftver (InventoryManager)
 Készítette: Princzinger Krisztián, 2026
 
-Jelenleg folyamatban lévő projekt: .NET keretrendszerben fejlesztett C# Készletnyilvántartó alkalmazás. Egyetemi beadandó projekt lévén a repozitórium a végső leadási határidőig (május) rejtve marad a kód védelme érdekében. Ezért a képeken és a szövegben lévő funkciók változhatnak a jövőben.
+Jelenleg folyamatban lévő projekt: **`.NET keretrendszerben fejlesztett C# Készletnyilvántartó alkalmazás`**. Egyetemi beadandó projekt lévén a repozitórium a végső leadási határidőig (május) rejtve marad a kód védelme érdekében. Ezért a képeken és a szövegben lévő funkciók változhatnak a jövőben.
 
 
 ## A program célja és szándékolt működése

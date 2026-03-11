@@ -1,3 +1,5 @@
+A magyar Readme fájl megtekintéséhez [kattints ide.](README.md)
+
 ## Project Task Documentation: Inventory Management Software (InventoryManager)
 Created by: Princzinger Krisztián, 2026
 

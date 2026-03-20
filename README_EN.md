@@ -7,7 +7,7 @@ Currently ongoing project: A **`C# Inventory Management application developed in
 
 ## Purpose and intended operation of the program
 
-The uploaded program is a graphical user interface (`Windows Forms`) desktop application designed for keeping records of product types in a warehouse. The user is able to add new product types to the system, list existing ones, modify and delete them in place, as well as save and load the entire database (`products.csv`). The program monitors unsaved modifications and protects the user from data loss with a warning.
+The uploaded program is a graphical user interface (`Windows Forms`) desktop application designed for keeping records of product types in a warehouse. The user is able to add new product types to the system, list existing ones, modify and delete them in place, as well as save and load the entire database (`products.json`). The program monitors unsaved modifications and protects the user from data loss with a warning.
 
 ![inline_editing](https://github.com/user-attachments/assets/ee788954-7418-4181-9bf6-0b3121260ceb)
 
@@ -26,7 +26,7 @@ The interface operates with a menu system and buttons, with custom logic attache
 <img width="804" height="482" alt="image" src="https://github.com/user-attachments/assets/1b786bf1-61c7-4beb-845c-0d871d6ccc50" />
 
 
-The application stores the data in memory in a generic collection of type `List<Product>`. The Save/Load functions perform file operations on the `products.csv` file. When saving, the software iterates through the items, and depending on the object type (examined with the `is` operator), it writes the attributes separated by a semicolon (`;`) into a new line. When loading, the `StreamReader` reads the file line by line, splits them using the `Split` method, and then, based on the identifier at the beginning of the line (`Normal`/`Electronic`), it instantiates the appropriate class and adds it to the collection.
+The application stores data in memory using a generic `List<Product>` collection. The Save/Load functions perform file operations on the `products.json` file using the built-in `System.Text.Json` library. During the save process, to preserve polymorphism, the software converts the collection to a `List<object>` type, serializes the entirety into a single, human-readable formatted JSON structure, and writes it to the file using the `File.WriteAllText` method. During loading, the software reads the entire content of the text file and parses it using a `JsonDocument`. The code iterates through the elements of the JSON array and dynamically determines the object type via a unique property check (verifying the presence of the `WarrantyMonth` key). Subsequently, it deserializes the nodes according to the appropriate derived or base class (`ElectronicProduct` or `Product`) and adds them to the in-memory collection.
 
 <img width="356" height="154" alt="image" src="https://github.com/user-attachments/assets/0d51abaa-aeef-4912-b71f-e9f45b5419d1" />
 

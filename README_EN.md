@@ -21,6 +21,12 @@ The software consists of multiple windows that inherit from the `System.Windows.
 ![new_product](https://github.com/user-attachments/assets/39779ca0-bbe4-447c-ab92-49be734c7959)
 
 
+There is also a search function: it filters the items stored in memory in real-time as the user types into the search field (reacting to the `TextChanged` event). The software queries the `List<Product>` collection using C#'s built-in LINQ (Language Integrated Query) technology and lambda expressions (`Where(p => ...)`). The search engine operates with case-insensitive (`ToLower()`) and whitespace-removing (`Trim()`) logic, simultaneously examining both the product name (`ItemName`) and the item number (`ItemNumber`). A new, filtered list is created from the matching elements, which is then passed to immediately update the visual display (`RefreshList`).
+
+![search](https://github.com/user-attachments/assets/496f51c0-427f-479f-a1f8-f554fba62711)
+
+
+
 The interface operates with a menu system and buttons, with custom logic attached to their `Click` events. The system frequently uses `MessageBox` for warnings and error messages (e.g., invalid data entry). The program is also prepared for accidental exits: the `FormClosing` event monitors for unsaved changes and prompts the user to save using a *Yes/No/Cancel* logic dialog.
 
 <img width="804" height="482" alt="image" src="https://github.com/user-attachments/assets/1b786bf1-61c7-4beb-845c-0d871d6ccc50" />

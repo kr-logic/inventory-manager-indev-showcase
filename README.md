@@ -21,6 +21,10 @@ A szoftver több ablakból áll, amelyek a `System.Windows.Forms.Form` ősosztá
 
 ![new_product](https://github.com/user-attachments/assets/39779ca0-bbe4-447c-ab92-49be734c7959)
 
+Van keresési funkció is: a keresés mezőbe történt felhasználói bevitel pillanatában (a `TextChanged` eseményre reagálva) szűri a memóriában tárolt elemeket. A szoftver a C# beépített LINQ (Language Integrated Query) technológiájának és lambda kifejezéseinek (`Where(p => ...)`) használatával végzi a `List<Product>` gyűjtemény lekérdezését. A keresőmotor kis- és nagybetűkre érzéketlen (`ToLower()`), ürestereket eltávolító (`Trim()`) logikával dolgozik, és párhuzamosan vizsgálja a termékek megnevezését (`ItemName`), valamint cikkszámát (`ItemNumber`). Az egyezést mutató elemekből egy új, szűrt lista jön létre, amelynek átadásával a rendszer azonnal frissíti a vizuális megjelenítést (`RefreshList`).
+
+![search](https://github.com/user-attachments/assets/9a0adb89-d1e0-4b54-bab1-fa300c4d3b56)
+
  
 A felület menürendszerrel és gombokkal operál, amelyek `Click` eseményeihez saját logika tartozik. A rendszer számos esetben használ `MessageBox`-ot figyelmeztetésekre és hibaüzenetekre (pl. hibás adatbevitel). A program fel van készítve a véletlen kilépésre is: a `FormClosing` esemény figyeli, hogy vannak-e mentetlen változások, és egy *Yes/No/Cancel* logikájú dialógussal rákérdez a mentésre.
 

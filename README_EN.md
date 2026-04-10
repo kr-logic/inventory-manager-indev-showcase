@@ -29,12 +29,12 @@ There is also a search function: it filters the items stored in memory in real-t
 
 The interface operates with a menu system and buttons, with custom logic attached to their `Click` events. The system frequently uses `MessageBox` for warnings and error messages (e.g., invalid data entry). The program is also prepared for accidental exits: the `FormClosing` event monitors for unsaved changes and prompts the user to save using a *Yes/No/Cancel* logic dialog.
 
-<img width="804" height="482" alt="image" src="https://github.com/user-attachments/assets/1b786bf1-61c7-4beb-845c-0d871d6ccc50" />
+<img src="https://github.com/user-attachments/assets/1b786bf1-61c7-4beb-845c-0d871d6ccc50" />
 
 
 The application stores data in memory using a generic `List<Product>` collection. The Save/Load functions perform file operations on the `products.json` file using the built-in `System.Text.Json` library. During the save process, to preserve polymorphism, the software converts the collection to a `List<object>` type, serializes the entirety into a single, human-readable formatted JSON structure, and writes it to the file using the `File.WriteAllText` method. During loading, the software reads the entire content of the text file and parses it using a `JsonDocument`. The code iterates through the elements of the JSON array and dynamically determines the object type via a unique property check (verifying the presence of the `WarrantyMonth` key). Subsequently, it deserializes the nodes according to the appropriate derived or base class (`ElectronicProduct` or `Product`) and adds them to the in-memory collection.
 
-<img width="356" height="154" alt="image" src="https://github.com/user-attachments/assets/0d51abaa-aeef-4912-b71f-e9f45b5419d1" />
+<img src="https://github.com/user-attachments/assets/0d51abaa-aeef-4912-b71f-e9f45b5419d1" />
 
 
 The entered or loaded data is displayed in a `ListBox` control, which uses the overridden `ToString()` method of the products for formatted output. When the user selects an item in the list, the `SelectedIndexChanged` event is triggered, the software casts the selected object to the appropriate type, and then loads its properties in detail into the text boxes (`TextBox`) on the right side of the interface, paying special attention to the readable formatting of numbers with thousand separators. The system also supports inline data editing: interactive buttons make the boxes editable, and upon saving the changes, the object's data, as well as the *Read-Only* properties (Gross price), are immediately and dynamically updated on the screen.
@@ -42,7 +42,7 @@ The entered or loaded data is displayed in a `ListBox` control, which uses the o
 Archive of previous screenshots
 <details>
 MainForm before the introduction of itemCount
-<img rc="https://github.com/user-attachments/assets/f624a2fc-319b-490c-bce0-006b1a360eeb" />
+<img src="https://github.com/user-attachments/assets/f624a2fc-319b-490c-bce0-006b1a360eeb" />
   
 first version of inline editing
 

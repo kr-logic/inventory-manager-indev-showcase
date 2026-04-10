@@ -9,7 +9,7 @@ Currently ongoing project: A **`C# Inventory Management application developed in
 
 The uploaded program is a graphical user interface (`Windows Forms`) desktop application designed for keeping records of product types in a warehouse. The user is able to add new product types to the system, list existing ones, modify and delete them in place, as well as save and load the entire database (`products.json`). The program monitors unsaved modifications and protects the user from data loss with a warning.
 
-![ShowingItemDetails](https://github.com/user-attachments/assets/2b488a0b-e015-4c34-96d3-d44850277ad0)
+![MainFormMainFeatures](https://github.com/user-attachments/assets/848a49e0-a313-437c-8fc4-9e4450a7d3dc)
 
 
 Besides `Form`s, the program is built on its own classes. A base class named `Product` was created to store the basic data of the products (item number, name, net price, VAT rate, quantity). The class strictly follows the principles of encapsulation: data members have `protected` visibility, and their access and modification are handled exclusively through public properties. Object instantiation is provided by parameterized constructors.
@@ -42,10 +42,14 @@ The entered or loaded data is displayed in a `ListBox` control, which uses the o
 Archive of previous screenshots
 <details>
 MainForm before the introduction of itemCount
-<img width="806" height="486" alt="image" src="https://github.com/user-attachments/assets/f624a2fc-319b-490c-bce0-006b1a360eeb" />
+<img rc="https://github.com/user-attachments/assets/f624a2fc-319b-490c-bce0-006b1a360eeb" />
   
 first version of inline editing
 
-<img width="806" height="486" alt="image" src="https://github.com/user-attachments/assets/ee788954-7418-4181-9bf6-0b3121260ceb" />
+<img src="https://github.com/user-attachments/assets/ee788954-7418-4181-9bf6-0b3121260ceb" />
+
+first version of listbox view 
+
+<img src="https://github.com/user-attachments/assets/2b488a0b-e015-4c34-96d3-d44850277ad0" />
 
 </details>

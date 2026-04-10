@@ -42,6 +42,11 @@ Korábbi képernyőmentések archívuma
 <details>
 itemCount bevezetése előtti MainForm
 <img width="806" height="486" alt="image" src="https://github.com/user-attachments/assets/f624a2fc-319b-490c-bce0-006b1a360eeb" />
+ 
+inline editing első verzió
+ 
+<img width="806" height="486" alt="image" src="https://github.com/user-attachments/assets/ee788954-7418-4181-9bf6-0b3121260ceb" />
+
 </details>
 
 Copyright (c) 2026 Princzinger Krisztián. All rights reserved.

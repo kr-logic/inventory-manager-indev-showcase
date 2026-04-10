@@ -10,7 +10,7 @@ Jelenleg folyamatban lévő projekt: **`.NET keretrendszerben fejlesztett C# Ké
 
 A feltöltött program egy grafikus felületű (`Windows Forms`) asztali alkalmazás, amely egy raktár terméktípusainak nyilvántartására szolgál. A felhasználó képes új terméktípusokat felvinni a rendszerbe, a meglévőket kilistázni, helyben módosítani és törölni, valamint a teljes adatbázist (`products.json`) menteni és betölteni. A program figyeli a mentetlen módosításokat, és figyelmeztetéssel védi a felhasználót az adatvesztéstől. 
 
-![ShowingItemDetails](https://github.com/user-attachments/assets/2b488a0b-e015-4c34-96d3-d44850277ad0)
+![MainFormMainFeatures](https://github.com/user-attachments/assets/848a49e0-a313-437c-8fc4-9e4450a7d3dc)
 
 
 A program `Form`-okon kívül saját osztályokra épül. Létrehozásra került egy `Product` nevű ősosztály, amely a termékek alapadatait (cikkszám, név, nettó ár, áfakulcs, darabszám) tárolja. Az osztály szigorúan követi az egységbezárás elveit: az adattagok `protected` láthatóságúak, elérésük és módosításuk kizárólag nyilvános tulajdonságokon keresztül történik. Az objektumok példányosítását paraméteres konstruktorok biztosítják.
@@ -46,6 +46,10 @@ itemCount bevezetése előtti MainForm
 inline editing első verzió
  
 <img width="806" height="486" alt="image" src="https://github.com/user-attachments/assets/ee788954-7418-4181-9bf6-0b3121260ceb" />
+
+első listbox megjelenítési verzió
+
+<img width="806" height="486" alt="image" src="https://github.com/user-attachments/assets/2b488a0b-e015-4c34-96d3-d44850277ad0" />
 
 </details>
 

@@ -50,50 +50,16 @@ A jelenlegi fejlesztési fázisban a rendszer az alábbi egy-a-többhöz (1:N) k
 Idő hiányában, a beadandó projekt stabilitását tartva szem előtt, ez már csak a - tervezett - v0.2-es verzióban kerül újradolgozásra.
 
 A v0.1-indev adatbázis architektúra:
-`
-+-----------------------+                 +------------------------+
-|       LOCATION        |                 |        PRODUCT         |
-|                       |                 |                        |
-+-----------------------+                 +------------------------+
-| PK: Id (GUID)         | 1             N | PK: CreatedAt (Unsafe) |
-|     LocationName      |-----------------| FK: LocationId         |
-|     LocationAddress   |                 |     ItemNumber         |
-+-----------------------+                 |     ItemName           |
-                                          |     NetPrice           |
-                                          |     VatRate            |
-                                          |     ItemCount          |
-                                          |                        |
-                                          +------------------------+
-                                                      ^
-                                                      | (Inheritance)
-                                          +------------------------+
-                                          |   ELECTRONIC_PRODUCT   |
-                                          +------------------------+
-                                          |     WarrantyMonth      |
-                                          +------------------------+`
+
+
+<img src="https://github.com/user-attachments/assets/451ebf8a-0aa6-4dab-99dc-3afbd5d3daca" />
+
 
 A **tervezett** v0.2-indev adatbázis architektúra:
-`
-+-----------------------+           +------------------------+           +------------------------+
-|       LOCATION        |           |    INVENTORY_STOCK     |           |    PRODUCT_CATALOG     |
-|             		       	|           |  					                 |           |         			            |
-+-----------------------+           +------------------------+           +------------------------+
-| PK: Id (GUID)         | 1       N | PK: Id (GUID)          | N       1 | PK: ItemNumber (String)|
-|     LocationName      |-----------| FK: LocationId         |-----------|     ItemName           |
-|     LocationAddress   |           | FK: ItemNumber         |           |     NetPrice           |
-+-----------------------+           |     Quantity           |           |     VatRate            |
-                                    |     CreatedAt          |           |	   GrossPrice		        |
-                                    +------------------------+           +------------------------+
-																					 ^
-                                                                                     | 
-                                                                                     |
-                                                                         +------------------------+
-                                                                         |   ELECTRONIC_PRODUCT   |
-                                                                         | 					      |
-                                                                         +------------------------+
-                                                                         | PK/FK: ItemNumber      |
-                                                                         |        WarrantyMonth   |
-                                                                         +------------------------+`
+
+
+<img src="https://github.com/user-attachments/assets/1b908dbb-5092-456a-a1d9-14d50c15debb" />
+
 
 Korábbi képernyőmentések archívuma
 <details>

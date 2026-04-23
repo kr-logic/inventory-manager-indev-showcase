@@ -8,13 +8,13 @@ Jelenleg folyamatban lévő projekt: **`.NET keretrendszerben fejlesztett C# Ké
 
 ## A program célja és szándékolt működése
 
-A feltöltött program egy grafikus felületű (`Windows Forms`) asztali alkalmazás, amely egy raktár terméktípusainak nyilvántartására szolgál. A felhasználó képes új terméktípusokat felvinni a rendszerbe, a meglévőket kilistázni, helyben módosítani és törölni, valamint a teljes adatbázist (`products.json`) menteni és betölteni. A program figyeli a mentetlen módosításokat, és figyelmeztetéssel védi a felhasználót az adatvesztéstől. 
+A feltöltött program egy grafikus felületű (`Windows Forms`) asztali alkalmazás, amely egy raktár terméktípusainak és maguknak a fizikai raktár-lokációknak a nyilvántartására szolgál. A felhasználó képes új terméktípusokat és raktárakat felvinni a rendszerbe, a meglévőket kilistázni, helyben módosítani és törölni (teljes CRUD funkcionalitás), valamint a teljes adatbázist (`products.json`) menteni és betölteni. A program figyeli a mentetlen módosításokat, és figyelmeztetéssel védi a felhasználót az adatvesztéstől. 
 
 
 <img src="https://github.com/user-attachments/assets/926ed1e5-6307-469a-b691-f363dc7644b8" />
 
 
-A program `Form`-okon kívül saját osztályokra épül. Létrehozásra került egy `Product` nevű ősosztály, amely a termékek alapadatait (cikkszám, név, nettó ár, áfakulcs, darabszám) tárolja. Az osztály szigorúan követi az egységbezárás elveit: az adattagok `protected` láthatóságúak, elérésük és módosításuk kizárólag nyilvános tulajdonságokon keresztül történik. Az objektumok példányosítását paraméteres konstruktorok biztosítják.
+A program `Form`-okon kívül saját osztályokra épül. Létrehozásra került egy `Product` nevű ősosztály, amely a termékek alapadatait (cikkszám, név, nettó ár, áfakulcs, darabszám, valamint a raktárhoz kapcsoló idegen kulcsot: `LocationId`) tárolja. Az osztály szigorúan követi az egységbezárás elveit: az adattagok `protected` láthatóságúak, elérésük és módosításuk kizárólag nyilvános tulajdonságokon keresztül történik. Az objektumok példányosítását paraméteres konstruktorok biztosítják. Ezen felül bevezetésre került a `Location` osztály, amely a telephelyeket/raktárakat reprezentálja, és saját azonosítóval (`Id`), névvel (`LocationName`), valamint címmel (`LocationAddress`) rendelkezik.
  
 A `Product` ősosztályból származik az `ElectronicProduct` utód osztály. Ez az öröklődés révén megkapja az alapvető tulajdonságokat, de kiegészül egy speciális, csak az elektronikai cikkekre jellemző adattaggal (garancia hónapokban). Az utód osztály konstruktora a `base` kulcsszóval hívja meg az ős konstruktorát, és a `ToString()` metódus felülírásával (`override`) kiegészíti a megjelenítést.
 
@@ -24,7 +24,7 @@ A szoftver több ablakból áll, amelyek a `System.Windows.Forms.Form` ősosztá
 <img src="https://github.com/user-attachments/assets/29f6a248-a445-4c46-9a09-25571996b54f" />
 
 
-Van keresési funkció is: a keresés mezőbe történt felhasználói bevitel pillanatában (a `TextChanged` eseményre reagálva) szűri a memóriában tárolt elemeket. A szoftver a C# beépített LINQ (Language Integrated Query) technológiájának és lambda kifejezéseinek (`Where(p => ...)`) használatával végzi a `List<Product>` gyűjtemény lekérdezését. A keresőmotor kis- és nagybetűkre érzéketlen (`ToLower()`), ürestereket eltávolító (`Trim()`) logikával dolgozik, és párhuzamosan vizsgálja a termékek megnevezését (`ItemName`), valamint cikkszámát (`ItemNumber`). Az egyezést mutató elemekből egy új, szűrt lista jön létre, amelynek átadásával a rendszer azonnal frissíti a vizuális megjelenítést (`RefreshList`).
+Van keresési és rendezési funkció is: a keresés mezőbe történt felhasználói bevitel pillanatában (a `TextChanged` eseményre reagálva) szűri a memóriában tárolt elemeket. A szoftver a C# beépített LINQ (Language Integrated Query) technológiájának és lambda kifejezéseinek (`Where(p => ...)`) használatával végzi a `List<Product>` gyűjtemény lekérdezését. A keresőmotor kis- és nagybetűkre érzéketlen (`ToLower()`), ürestereket eltávolító (`Trim()`) logikával dolgozik, és párhuzamosan vizsgálja a termékek megnevezését (`ItemName`), valamint cikkszámát (`ItemNumber`). Az egyezést mutató elemekből egy új, szűrt lista jön létre. A keresés mellett a program egy beépített rendezési algoritmust is használ, amellyel a felhasználó a listában szerepeltetett tulajdonságokat ABC szerint sorba rendezheti. Az így előállt szűrt és rendezett lista átadásával a rendszer azonnal frissíti a vizuális megjelenítést  (`RefreshList`).
 
 
 <img src="https://github.com/user-attachments/assets/19a57d4d-0ef3-4cb4-abc4-c99826826e23" />
@@ -44,6 +44,56 @@ Az alkalmazás egy `List<Product>` típusú generikus gyűjteményben tárolja a
  
 A felvitt vagy betöltött adatok egy `ListBox` vezérlőben jelennek meg, mely a termékek felülírt `ToString()` metódusát használja a formázott kiíráshoz. Ha a felhasználó kijelöl egy elemet a listában, a `SelectedIndexChanged` esemény lefut, a szoftver a kijelölt objektumot visszaalakítja (castolja) a megfelelő típusra, majd a tulajdonságait részletesen betölti a felület jobb oldalán található szövegdobozokba (`TextBox`), külön figyelve a számok ezreselválasztós, olvasható formázására. A rendszer helybeni adatszerkesztést is támogat: az interaktív gombokkal a dobozok írhatóvá válnak, majd a módosítás mentésekor az objektum adatai, valamint a *Read-Only* tulajdonságok (Bruttó ár) is azonnal, dinamikusan frissülnek a képernyőn.
 
+Adatbázis architektúra (v0.1 INDEV)
+A jelenlegi fejlesztési fázisban a rendszer az alábbi egy-a-többhöz (1:N) kapcsolatot valósítja meg a Raktárak és a Termékek között. Az architektúra tudatosan dokumentált technikai adósságot (Technical Debt) tartalmaz a `Product` tábla elsődleges kulcsát (`CreatedAt`) illetően. 
+
+Idő hiányában, a beadandó projekt stabilitását tartva szem előtt, ez már csak a - tervezett - v0.2-es verzióban kerül újradolgozásra.
+
+A v0.1-indev adatbázis architektúra:
+`
++-----------------------+                 +------------------------+
+|       LOCATION        |                 |        PRODUCT         |
+|                       |                 |                        |
++-----------------------+                 +------------------------+
+| PK: Id (GUID)         | 1             N | PK: CreatedAt (Unsafe) |
+|     LocationName      |-----------------| FK: LocationId         |
+|     LocationAddress   |                 |     ItemNumber         |
++-----------------------+                 |     ItemName           |
+                                          |     NetPrice           |
+                                          |     VatRate            |
+                                          |     ItemCount          |
+                                          |                        |
+                                          +------------------------+
+                                                      ^
+                                                      | (Inheritance)
+                                          +------------------------+
+                                          |   ELECTRONIC_PRODUCT   |
+                                          +------------------------+
+                                          |     WarrantyMonth      |
+                                          +------------------------+`
+
+A **tervezett** v0.2-indev adatbázis architektúra:
+`
++-----------------------+           +------------------------+           +------------------------+
+|       LOCATION        |           |    INVENTORY_STOCK     |           |    PRODUCT_CATALOG     |
+|             		       	|           |  					                 |           |         			            |
++-----------------------+           +------------------------+           +------------------------+
+| PK: Id (GUID)         | 1       N | PK: Id (GUID)          | N       1 | PK: ItemNumber (String)|
+|     LocationName      |-----------| FK: LocationId         |-----------|     ItemName           |
+|     LocationAddress   |           | FK: ItemNumber         |           |     NetPrice           |
++-----------------------+           |     Quantity           |           |     VatRate            |
+                                    |     CreatedAt          |           |	   GrossPrice		        |
+                                    +------------------------+           +------------------------+
+																					 ^
+                                                                                     | 
+                                                                                     |
+                                                                         +------------------------+
+                                                                         |   ELECTRONIC_PRODUCT   |
+                                                                         | 					      |
+                                                                         +------------------------+
+                                                                         | PK/FK: ItemNumber      |
+                                                                         |        WarrantyMonth   |
+                                                                         +------------------------+`
 
 Korábbi képernyőmentések archívuma
 <details>

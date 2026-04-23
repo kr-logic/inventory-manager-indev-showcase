@@ -7,13 +7,13 @@ Currently ongoing project: A **`C# Inventory Management application developed in
 
 ## Purpose and intended operation of the program
 
-The uploaded program is a graphical user interface (`Windows Forms`) desktop application designed for keeping records of product types in a warehouse. The user is able to add new product types to the system, list existing ones, modify and delete them in place, as well as save and load the entire database (`products.json`). The program monitors unsaved modifications and protects the user from data loss with a warning.
+The uploaded program is a graphical user interface (`Windows Forms`) desktop application designed for keeping records of product types and the physical warehouse locations themselves. The user is able to add new product types and locations to the system, list existing ones, modify and delete them in place (full CRUD functionality), as well as save and load the entire database (`products.json`). The program monitors unsaved modifications and protects the user from data loss with a warning.
 
 
 <img src="https://github.com/user-attachments/assets/926ed1e5-6307-469a-b691-f363dc7644b8" />
 
 
-Besides `Form`s, the program is built on its own classes. A base class named `Product` was created to store the basic data of the products (item number, name, net price, VAT rate, quantity). The class strictly follows the principles of encapsulation: data members have `protected` visibility, and their access and modification are handled exclusively through public properties. Object instantiation is provided by parameterized constructors.
+Besides `Form`s, the program is built on its own classes. A base class named `Product` was created to store the basic data of the products (item number, name, net price, VAT rate, quantity, as well as the foreign key linking it to the warehouse: `LocationId`). The class strictly follows the principles of encapsulation: data members have `protected` visibility, and their access and modification are handled exclusively through public properties. Object instantiation is provided by parameterized constructors. A `Location` class was introduced to represent the physical sites/warehouses, featuring its own identifier (`Id`), name (`LocationName`), and address (`LocationAddress`).
 
 The `ElectronicProduct` derived class inherits from the `Product` base class. Through this inheritance, it receives the basic properties but is supplemented with a special data member specific only to electronic items (warranty in months). The constructor of the derived class calls the base constructor using the `base` keyword, and it extends the display by overriding the `ToString()` method.
 
@@ -23,7 +23,7 @@ The software consists of multiple windows that inherit from the `System.Windows.
 <img src="https://github.com/user-attachments/assets/29f6a248-a445-4c46-9a09-25571996b54f" />
 
 
-There is also a search function: it filters the items stored in memory in real-time as the user types into the search field (reacting to the `TextChanged` event). The software queries the `List<Product>` collection using C#'s built-in LINQ (Language Integrated Query) technology and lambda expressions (`Where(p => ...)`). The search engine operates with case-insensitive (`ToLower()`) and whitespace-removing (`Trim()`) logic, simultaneously examining both the product name (`ItemName`) and the item number (`ItemNumber`). A new, filtered list is created from the matching elements, which is then passed to immediately update the visual display (`RefreshList`).
+There is also a search and sorting function: it filters the items stored in memory in real-time as the user types into the search field (reacting to the `TextChanged` event). The software queries the `List<Product>` collection using C#'s built-in LINQ (Language Integrated Query) technology and lambda expressions (`Where(p => ...)`). The search engine operates with case-insensitive (`ToLower()`) and whitespace-removing (`Trim()`) logic, simultaneously examining both the product name (`ItemName`) and the item number (`ItemNumber`). A new, filtered list is created from the matching elements. In addition to searching, the program utilizes a sorting algorithm, allowing the user to alphabetically order the list items based on the three properties shown. The resulting filtered and sorted list which is then passed to immediately update the visual display (`RefreshList`).
 
 
 <img src="https://github.com/user-attachments/assets/19a57d4d-0ef3-4cb4-abc4-c99826826e23" />
@@ -35,13 +35,31 @@ The interface operates with a menu system and buttons, with custom logic attache
 <img src="https://github.com/user-attachments/assets/956717f4-63ca-431b-9243-3468f9d89a9c" />
 
 
-The application stores data in memory using a generic `List<Product>` collection. The Save/Load functions perform file operations on the `products.json` file using the built-in `System.Text.Json` library. During the save process, to preserve polymorphism, the software converts the collection to a `List<object>` type, serializes the entirety into a single, human-readable formatted JSON structure, and writes it to the file using the `File.WriteAllText` method. During loading, the software reads the entire content of the text file and parses it using a `JsonDocument`. The code iterates through the elements of the JSON array and dynamically determines the object type via a unique property check (verifying the presence of the `WarrantyMonth` key). Subsequently, it deserializes the nodes according to the appropriate derived or base class (`ElectronicProduct` or `Product`) and adds them to the in-memory collection.
+The application stores data in memory using a generic `List<Product>` and a `List<Location>` collection. The Save/Load functions perform file operations on the `products.json` file using the built-in `System.Text.Json` library. During the save process, to preserve polymorphism, the software converts the collection to a `List<object>` type, serializes the entirety into a single, human-readable formatted JSON structure, and writes it to the file using the `File.WriteAllText` method. During loading, the software reads the entire content of the text file and parses it using a `JsonDocument`. The code iterates through the elements of the JSON array and dynamically determines the object type via a unique property check (verifying the presence of the `WarrantyMonth` key). Subsequently, it deserializes the nodes according to the appropriate derived or base class (`ElectronicProduct` or `Product`) and adds them to the in-memory collection.
 
 
 <img src="https://github.com/user-attachments/assets/413b6f04-c94f-48e7-b138-5d3f8baf272b" />
 
 
 The entered or loaded data is displayed in a `ListBox` control, which uses the overridden `ToString()` method of the products for formatted output. When the user selects an item in the list, the `SelectedIndexChanged` event is triggered, the software casts the selected object to the appropriate type, and then loads its properties in detail into the text boxes (`TextBox`) on the right side of the interface, paying special attention to the readable formatting of numbers with thousand separators. The system also supports inline data editing: interactive buttons make the boxes editable, and upon saving the changes, the object's data, as well as the *Read-Only* properties (Gross price), are immediately and dynamically updated on the screen.
+
+Database architecture (v0.1 indev)
+
+In the current development phase, the system implements the following one-to-many (1:N) relationship between Locations and Products. The architecture contains consciously documented Technical Debt regarding the primary key (`CreatedAt`) of the `Product` table.
+
+Due to time constraints, and with the stability of the submitted project in mind, this will only be reworked in the - planned - v0.2 release.
+
+The v0.1-indev database architecture:
+
+<img src="https://github.com/user-attachments/assets/451ebf8a-0aa6-4dab-99dc-3afbd5d3daca" />
+
+
+The planned v0.2-indev database architecture:
+
+
+<img src="https://github.com/user-attachments/assets/1b908dbb-5092-456a-a1d9-14d50c15debb" />
+
+
 
 Archive of previous screenshots
 <details>

@@ -32,7 +32,9 @@ Van keresési funkció is: a keresés mezőbe történt felhasználói bevitel p
  
 A felület menürendszerrel és gombokkal operál, amelyek `Click` eseményeihez saját logika tartozik. A rendszer számos esetben használ `MessageBox`-ot figyelmeztetésekre és hibaüzenetekre (pl. hibás adatbevitel). A program fel van készítve a véletlen kilépésre is: a `FormClosing` esemény figyeli, hogy vannak-e mentetlen változások, és egy *Yes/No/Cancel* logikájú dialógussal rákérdez a mentésre.
 
-<img src="https://github.com/user-attachments/assets/1b786bf1-61c7-4beb-845c-0d871d6ccc50" />
+
+<img src="https://github.com/user-attachments/assets/956717f4-63ca-431b-9243-3468f9d89a9c" />
+
  
 Az alkalmazás egy `List<Product>` típusú generikus gyűjteményben tárolja az adatokat a memóriában. A Mentés/Betöltés funkciók a `System.Text.Json` beépített könyvtár segítségével hajtanak végre fájlműveleteket a `products.json` fájlon. Mentéskor a szoftver a polimorfizmus megőrzése érdekében `List<object>` típusúvá alakítja a gyűjteményt, majd az egészet egyetlen, ember számára is olvashatóan formázott JSON struktúrává szerializálja, és a `File.WriteAllText` metódussal kiírja a fájlba. Betöltéskor a szoftver egyben beolvassa a szöveges fájl tartalmát, és egy `JsonDocument` segítségével elemzi azt. A kód végigiterál a JSON tömb elemein, és egy egyedi tulajdonság-vizsgálattal (a `WarrantyMonth` kulcs meglétének ellenőrzésével) dinamikusan dönti el az objektum típusát. Ezt követően a megfelelő származtatott vagy alaposztály (`ElectronicProduct` vagy `Product`) szerint deszerializálja a csomópontokat, és hozzáadja őket a memóriában lévő gyűjteményhez.
 
